@@ -176,12 +176,14 @@ def upload_csv():
             db.session.add(artifact)
             db.session.commit()
         return redirect(url_for('upload_csv'))
-    return """
-            <form method='post' action='/' enctype='multipart/form-data'>
-              Upload a csv file: <input type='file' name='file'>
-              <input type='submit' value='Upload'>
-            </form>
-           """
+    return render_template('upload.html', title='CSV Viewer')
+
+# """
+# <form method='post' action='/' enctype='multipart/form-data'>
+#   Upload a csv file: <input type='file' name='file'>
+#   <input type='submit' value='Upload'>
+# </form>
+# """
 
 
 @app.route('/show')
