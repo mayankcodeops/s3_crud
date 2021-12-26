@@ -2,21 +2,152 @@
 <table id="data" class="table table-striped">
   <thead>
     <tr>
-      <th>Username</th>
-      <th>Identifer</th>
-      <th>FirstName</th>
-      <th>LastName</th>
+      <td>Object ID</td>
+      <th>Highlighted</th>
+      <th>Accession Number</th>
+      <th>Accession Number</th>
+      <th>Accession Year</th>
+      <th>Public Domain</th>
+      <th>Primary Image</th>
+      <th>Primary Image Small</th>
+      <th>Department</th>
+      <th>Object Name</th>
+      <th>Title</th>
+      <th>Culture</th>
+      <th>Period</th>
+      <th>Dynasty</th>
+      <th>Reign</th>
+      <th>Portfolio</th>
+      <th>Artist Role</th>
+      <th>Artist Prefix</th>
+      <th>Display Name</th>
+      <th>Display Bio</th>
+      <th>Artist Suffix</th>
+      <th>Alpha Sort</th>
+      <th>Nationality</th>
+      <th>Begin Date</th>
+      <th>End Date</th>
+      <th>Gender</th>
+      <th>Wiki Data URL</th>
+      <th>ULAN URL</th>
+      <th>Object Date</th>
+      <th>Obj Begin Date</th>
+      <th>Obj End Date</th>
+      <th>Medium</th>
+      <th>Dimensions</th>
+      <th>Measurements</th>
+      <th>Credit Line</th>
+      <th>Geography Type</th>
+      <th>City</th>
+      <th>State</th>
+      <th>County</th>
+      <th>Country</th>
+      <th>Region</th>
+      <th>Sub Region</th>
+      <th>Locale</th>
+      <th>Locus</th>
+      <th>Excavation</th>
+      <th>River</th>
+      <th>Classification</th>
+      <th>Rights Reproduction</th>
+      <th>Resource Link</th>
+      <th>Metadata Date</th>
+      <th>Repository</th>
+      <th>Obj URL</th>
+      <th>Tags</th>
+      <th>Obj Data Wiki URL</th>
+      <th>TimeLine Work</th>
+      <th>Gallery Number</th>
+      <th>ConstituentID</th>
+      <th>Role</th>
+      <th>Name</th>
+      <th>Const ULAN URL</th>
+      <th>Const Wiki Data URL</th>
+      <th>Gender</th>
+      <th>Options</th>
     </tr>
   </thead>
   <tbody>
-    {% for user in users %}
+    {% for artifact in artifacts %}
     <tr>
-      <td>{{ user.username }}</td>
-      <td>{{ user.identifier }}</td>
-      <td>{{ user.firstname }}</td>
-      <td>{{ user.lastname }}</td>
+      <td>{{ artifact.objectID }}</td>
+      <td>{{ artifact.isHighlight }}</td>
+      <td>{{ artifact.accessionNumber }}</td>
+      <td>{{ artifact.accessionYear }}</td>
+      <td>{{ artifact.isPublicDomain }}</td>
+      <td>{{ artifact.primaryImage }}</td>
+      <td>{{ artifact.primaryImageSmall }}</td>
+      <td>{{ artifact.department }}</td>
+      <td>{{ artifact.objectName }}</td>
+      <td>{{ artifact.title }}</td>
+      <td>{{ artifact.culture }}</td>
+      <td>{{ artifact.period }}</td>
+      <td>{{ artifact.dynasty }}</td>
+      <td>{{ artifact.reign }}</td>
+      <td>{{ artifact.portfolio }}</td>
+      <td>{{ artifact.artistRole }}</td>
+      <td>{{ artifact.artistPrefix }}</td>
+      <td>{{ artifact.artistDisplayName }}</td>
+      <td>{{ artifact.artistDisplayBio }}</td>
+      <td>{{ artifact.artistSuffix }}</td>
+      <td>{{ artifact.artistAlphaSort }}</td>
+      <td>{{ artifact.artistNationality }}</td>
+      <td>{{ artifact.artistBeginDate }}</td>
+      <td>{{ artifact.artistEndDate }}</td>
+      <td>{{ artifact.artistGender }}</td>
+      <td>{{ artifact.artistWikiDataURL }}</td>
+      <td>{{ artifact.artistULAN_URL }}</td>
+      <td>{{ artifact.objectDate }}</td>
+      <td>{{ artifact.objectBeginDate }}</td>
+      <td>{{ artifact.objectEndDate }}</td>
+      <td>{{ artifact.medium }}</td>
+      <td>{{ artifact.dimensions }}</td>
+      <td>{{ artifact.measurements }}</td>
+      <td>{{ artifact.creditLine }}</td>
+      <td>{{ artifact.geographyType }}</td>
+      <td>{{ artifact.city }}</td>
+      <td>{{ artifact.state }}</td>
+      <td>{{ artifact.county }}</td>
+      <td>{{ artifact.country }}</td>
+      <td>{{ artifact.region }}</td>
+      <td>{{ artifact.subregion }}</td>
+      <td>{{ artifact.locale }}</td>
+      <td>{{ artifact.locus }}</td>
+      <td>{{ artifact.excavation }}</td>
+      <td>{{ artifact.river }}</td>
+      <td>{{ artifact.classification }}</td>
+      <td>{{ artifact.rightsAndReproduction }}</td>
+      <td>{{ artifact.linkResource }}</td>
+      <td>{{ artifact.metadataDate }}</td>
+      <td>{{ artifact.repository }}</td>
+      <td>{{ artifact.objectURL }}</td>
+      <td>{{ artifact.tags }}</td>
+      <td>{{ artifact.objectDataWikiURL }}</td>
+      <td>{{ artifact.isTimeLineWork }}</td>
+      <td>{{ artifact.galleryNumber }}</td>
+      <td>{{ artifact.constituentID }}</td>
+      <td>{{ artifact.role }}</td>
+      <td>{{ artifact.name }}</td>
+      <td>{{ artifact.constituentULANURL }}</td>
+      <td>{{ artifact.constituentWikiDataURL }}</td>
+      <td>{{ artifact.gender }}</td>
+      <td>{{ artifact.gender }}</td>
+      <td>
+        <button type="button" class="btn btn-success btn-sm"
+                onclick="window.location.href='{{ url_for('update', object_id=artifact.objectID ) }}';">Edit</button>
+        <button type="button" class="btn btn-danger btn-sm"
+                onclick="window.location.href='{{ url_for('delete', object_id=artifact.objectID ) }}';">Delete</button>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable();
+    });
+  </script>
 {% endblock %}

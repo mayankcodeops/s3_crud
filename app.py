@@ -1,18 +1,20 @@
 from io import TextIOWrapper
 import csv
 
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, flash
 from flask.templating import render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
+from forms import EditArtifactForm
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SECRET_KEY'] = 'hard-to-guess'
 db = SQLAlchemy(app)
-
-admin = Admin(app,name='users', template_mode='bootstrap3')
+Bootstrap(app)
+admin = Admin(app, name='users', template_mode='bootstrap3')
 
 
 class User(db.Model):
@@ -170,26 +172,45 @@ def upload_csv():
         csv_file = TextIOWrapper(csv_file, encoding='utf-8')
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
-            # user = User(username=row[0], identifier=row[1], firstname=row[2], lastname=row[3])
-            print(row)
             artifact = Artifact(row)
             db.session.add(artifact)
             db.session.commit()
         return redirect(url_for('upload_csv'))
     return render_template('upload.html', title='CSV Viewer')
 
-# """
-# <form method='post' action='/' enctype='multipart/form-data'>
-#   Upload a csv file: <input type='file' name='file'>
-#   <input type='submit' value='Upload'>
-# </form>
-# """
-
 
 @app.route('/show')
 def show():
-    users = User.query
-    return render_template('table.html', title='User Table', users=users)
+    artifacts = Artifact.query
+    return render_template('table.html', title='Artifacts Table', artifacts=artifacts)
+
+
+@app.route('/new', methods=['GET', 'POST'])
+def new():
+    pass
+
+
+@app.route('/update/<object_id>', methods=['GET', 'POST'])
+def update(object_id):
+    artifact = Artifact.query.filter_by(objectID=object_id).first_or_404()
+    form = EditArtifactForm(request.form, obj=artifact)
+    if form.validate_on_submit():
+        form.populate_obj(artifact)
+        db.session.add(artifact)
+        db.session.commit()
+        flash('Artifact Updated')
+        return redirect('/show')
+    for key in keys:
+        setattr(form, key, artifact.__dict__[key])
+    return render_template('update_artifact.html', title='Edit Artifact', form=form)
+
+
+@app.route('/delete/<object_id>', methods=['GET', 'POST'])
+def delete(object_id):
+    Artifact.query.filter_by(objectID=object_id).delete()
+    db.session.commit()
+    artifacts = Artifact.query
+    return render_template('table.html', title='Artifacts Table', artifacts=artifacts)
 
 
 if __name__ == '__main__':
