@@ -1,10 +1,11 @@
 {% extends "base.html" %} {% block content %}
+<button type="button" class="btn btn-success btn-sm"
+                onclick="window.location.href='{{ url_for('new') }}';">Create Artifact</button>
 <table id="data" class="table table-striped">
   <thead>
     <tr>
       <td>Object ID</td>
       <th>Highlighted</th>
-      <th>Accession Number</th>
       <th>Accession Number</th>
       <th>Accession Year</th>
       <th>Public Domain</th>
@@ -131,7 +132,7 @@
       <td>{{ artifact.constituentULANURL }}</td>
       <td>{{ artifact.constituentWikiDataURL }}</td>
       <td>{{ artifact.gender }}</td>
-      <td>{{ artifact.gender }}</td>
+<!--      <td>{{ artifact.gender }}</td>-->
       <td>
         <button type="button" class="btn btn-success btn-sm"
                 onclick="window.location.href='{{ url_for('update', object_id=artifact.objectID ) }}';">Edit</button>

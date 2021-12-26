@@ -187,13 +187,24 @@ def show():
 
 @app.route('/new', methods=['GET', 'POST'])
 def new():
-    pass
+    form = EditArtifactForm(request.form)
+    if form.validate_on_submit():
+        row = []
+        for key in keys:
+            row.append(request.form[key])
+        row = tuple(row)
+        artifact = Artifact(row)
+        db.session.add(artifact)
+        db.session.commit()
+        return redirect('/show')
+    return render_template('update_artifact.html', title='Add Artifact', form=form)
 
 
 @app.route('/update/<object_id>', methods=['GET', 'POST'])
 def update(object_id):
     artifact = Artifact.query.filter_by(objectID=object_id).first_or_404()
     form = EditArtifactForm(request.form, obj=artifact)
+    print(request.form.to_dict())
     if form.validate_on_submit():
         form.populate_obj(artifact)
         db.session.add(artifact)
