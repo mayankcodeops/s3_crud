@@ -1,0 +1,2 @@
+graft csvviewer/app/templates
+global-exclude *.pyc
