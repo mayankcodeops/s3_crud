@@ -36,6 +36,7 @@ def new():
         for key in keys:
             row.append(request.form[key])
         row = tuple(row)
+        print(row)
         artifact = Artifact(row)
         db.session.add(artifact)
         db.session.commit()
