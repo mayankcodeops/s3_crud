@@ -1,31 +1,4 @@
-from io import TextIOWrapper
-import csv
-
-from flask import Flask, request, redirect, url_for
-from flask.templating import render_template
-from flask_sqlalchemy import SQLAlchemy
-from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-app.config['SECRET_KEY'] = 'hard-to-guess'
-db = SQLAlchemy(app)
-
-admin = Admin(app,name='users', template_mode='bootstrap3')
-
-
-class User(db.Model):
-    username = db.Column(db.String(80), unique=True)
-    identifier = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(100))
-    lastname = db.Column(db.String(100))
-
-    def __repr__(self):
-        return "<User: {}>".format(self.username)
-
-
-admin.add_view(ModelView(User, db.session))
+from . import db
 
 keys = [
     "objectID",
@@ -95,7 +68,7 @@ keys = [
 class Artifact(db.Model):
     objectID = db.Column(db.String(10), primary_key=True)
     isHighlight = db.Column(db.String(50))
-    accessionNumber = db.Column(db.String(50), unique=True)
+    accessionNumber = db.Column(db.String(50))
     accessionYear = db.Column(db.String(50))
     isPublicDomain = db.Column(db.String(50))
     primaryImage = db.Column(db.Text)
@@ -158,39 +131,3 @@ class Artifact(db.Model):
     def __init__(self, row):
         for key, item in zip(keys, row):
             self.__dict__[key] = item
-
-
-admin.add_view(ModelView(Artifact, db.session))
-
-
-@app.route('/', methods=['GET', 'POST'])
-def upload_csv():
-    if request.method == 'POST':
-        csv_file = request.files['file']
-        csv_file = TextIOWrapper(csv_file, encoding='utf-8')
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        for row in csv_reader:
-            # user = User(username=row[0], identifier=row[1], firstname=row[2], lastname=row[3])
-            print(row)
-            artifact = Artifact(row)
-            db.session.add(artifact)
-            db.session.commit()
-        return redirect(url_for('upload_csv'))
-    return """
-            <form method='post' action='/' enctype='multipart/form-data'>
-              Upload a csv file: <input type='file' name='file'>
-              <input type='submit' value='Upload'>
-            </form>
-           """
-
-
-@app.route('/show')
-def show():
-    users = User.query
-    return render_template('table.html', title='User Table', users=users)
-
-
-if __name__ == '__main__':
-    db.create_all()
-    app.run()
-

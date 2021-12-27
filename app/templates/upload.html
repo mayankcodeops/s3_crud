@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block content %}
+<form method='post' action='/' enctype='multipart/form-data'>
+  <div class="input-group mb-3">
+    <input type="file" class="form-control" name="file" id="inputGroupFile02">
+    <label class="input-group-text" for="inputGroupFile02">Upload</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

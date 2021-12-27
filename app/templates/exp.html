@@ -1,0 +1,500 @@
+<form action="" method="POST" role="form" class="form-horizontal" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="objectid" class="col-md-2 control-label">ObjectID
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="objectid" maxlength="50" name="objectid" type="text" value="FALSE">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="isHighlight" class="col-md-2 control-label">Ishighlight
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="isHighlight" maxlength="50" name="isHighlight" type="text" value="FALSE">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="accessionNumber" class="col-md-2 control-label">Accessionnumber
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="accessionNumber" maxlength="50" name="accessionNumber" type="text" value="1979.486.1">
+    </div>
+  </div>
+  <div class="form-group">
+    {{ form.accessionNumber.label }}: {{ form.accessionNumber(value=form.accessionNumber.data) }}
+  </div>
+  <div class="form-group">
+    <label for="accessionYear" class="col-md-2 control-label">Accessionyear
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="accessionYear" maxlength="50" name="accessionYear" type="text" value="1979">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="isPublicDomain" class="col-md-2 control-label">Ispublicdomain
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="isPublicDomain" maxlength="50" name="isPublicDomain" type="text" value="FALSE">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="primaryImage" class="col-md-2 control-label">Primaryimage
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <textarea class="form-control" id="primaryImage" name="primaryImage"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="primaryImageSmall" class="col-md-2 control-label">Primaryimagesmall
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <textarea class="form-control" id="primaryImageSmall" name="primaryImageSmall"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="department" class="col-md-2 control-label">Department
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="department" maxlength="100" name="department" type="text" value="The American Wing">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="objectName" class="col-md-2 control-label">Objectname
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="objectName" maxlength="50" name="objectName" type="text" value="Coin">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="title" class="col-md-2 control-label">Title
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="title" maxlength="100" name="title" type="text" value="One-dollar Liberty Head Coin">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="culture" class="col-md-2 control-label">Culture
+        &nbsp;
+    </label>
+    <div class="col-md-10" bis_skin_checked="1">
+      <input class="form-control" id="culture" maxlength="50" name="culture" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="period" class="col-md-2 control-label">Period
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="period" maxlength="100" name="period" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="dynasty" class="col-md-2 control-label">Dynasty
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="dynasty" maxlength="100" name="dynasty" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="reign" class="col-md-2 control-label">Reign
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="reign" maxlength="100" name="reign" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="portfolio" class="col-md-2 control-label">Portfolio
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="portfolio" maxlength="100" name="portfolio" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistRole" class="col-md-2 control-label">Artistrole
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistRole" maxlength="50" name="artistRole" type="text" value="Maker">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistPrefix" class="col-md-2 control-label">Artistprefix
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistPrefix" maxlength="50" name="artistPrefix" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistDisplayName" class="col-md-2 control-label">Artistdisplayname
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistDisplayName" maxlength="200" name="artistDisplayName" type="text" value="James Barton Longacre">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistDisplayBio" class="col-md-2 control-label">Artistdisplaybio
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistDisplayBio" maxlength="200" name="artistDisplayBio" type="text" value="American, Delaware County, Pennsylvania 1794–1869 Philadelphia, Pennsylvania">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistSuffix" class="col-md-2 control-label">Artistsuffix
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistSuffix" maxlength="50" name="artistSuffix" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistAlphaSort" class="col-md-2 control-label">Artistalphasort
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistAlphaSort" maxlength="100" name="artistAlphaSort" type="text" value="Longacre, James Barton">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistNationality" class="col-md-2 control-label">Artistnationality
+        &nbsp;
+    </label>
+    <div class="col-md-10" bis_skin_checked="1">
+      <input class="form-control" id="artistNationality" maxlength="50" name="artistNationality" type="text" value="American">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistBeginDate" class="col-md-2 control-label">Artistbegindate
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistBeginDate" maxlength="50" name="artistBeginDate" type="text" value="1794">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistEndDate" class="col-md-2 control-label">Artistenddate
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistEndDate" maxlength="50" name="artistEndDate" type="text" value="1869">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistGender" class="col-md-2 control-label">Artistgender
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistGender" maxlength="50" name="artistGender" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistWikiDataURL" class="col-md-2 control-label">Artistwikidataurl
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistWikiDataURL" maxlength="200" name="artistWikiDataURL" type="text" value="https://www.wikidata.org/wiki/Q3806459">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="artistULAN_URL" class="col-md-2 control-label">Artistulan Url
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="artistULAN_URL" maxlength="200" name="artistULAN_URL" type="text" value="http://vocab.getty.edu/page/ulan/500011409">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="objectDate" class="col-md-2 control-label">Objectdate
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="objectDate" maxlength="100" name="objectDate" type="text" value="1853">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="objectBeginDate" class="col-md-2 control-label">Objectbegindate
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="objectBeginDate" maxlength="50" name="objectBeginDate" type="text" value="1853">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="objectEndDate" class="col-md-2 control-label">Objectenddate
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="objectEndDate" maxlength="50" name="objectEndDate" type="text" value="1853">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="medium" class="col-md-2 control-label">Medium
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="medium" maxlength="50" name="medium" type="text" value="Gold">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="dimensions" class="col-md-2 control-label">Dimensions
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="dimensions" maxlength="50" name="dimensions" type="text" value="Dimensions unavailable">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="measurements" class="col-md-2 control-label">Measurements
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <textarea class="form-control" id="measurements" name="measurements"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="creditLine" class="col-md-2 control-label">Creditline
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="creditLine" maxlength="100" name="creditLine" type="text" value="Gift of Heinz L. Stoppelmann, 1979">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="geographyType" class="col-md-2 control-label">Geographytype
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="geographyType" maxlength="100" name="geographyType" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="city" class="col-md-2 control-label">City
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="city" maxlength="50" name="city" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="state" class="col-md-2 control-label">State
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="state" maxlength="50" name="state" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="county" class="col-md-2 control-label">County
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="county" maxlength="50" name="county" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="country" class="col-md-2 control-label">Country
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="country" maxlength="50" name="country" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="region" class="col-md-2 control-label">Region
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="region" maxlength="50" name="region" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="subregion" class="col-md-2 control-label">Subregion
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="subregion" maxlength="50" name="subregion" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="locale" class="col-md-2 control-label">Locale
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="locale" maxlength="50" name="locale" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="locus" class="col-md-2 control-label">Locus
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="locus" maxlength="50" name="locus" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="excavation" class="col-md-2 control-label">Excavation
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="excavation" maxlength="100" name="excavation" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="river" class="col-md-2 control-label">River
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="river" maxlength="50" name="river" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="classification" class="col-md-2 control-label">Classification
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="classification" maxlength="50" name="classification" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="rightsAndReproduction" class="col-md-2 control-label">Rightsandreproduction
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="rightsAndReproduction" maxlength="100" name="rightsAndReproduction" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="linkResource" class="col-md-2 control-label">Linkresource
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="linkResource" maxlength="200" name="linkResource" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="metadataDate" class="col-md-2 control-label">Metadatadate
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="metadataDate" maxlength="50" name="metadataDate" type="text" value="2021-04-06T04:41:04.967Z">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="repository" class="col-md-2 control-label">Repository
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="repository" maxlength="100" name="repository" type="text" value="Metropolitan Museum of Art, New York, NY">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="objectURL" class="col-md-2 control-label">Objecturl
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="objectURL" maxlength="100" name="objectURL" type="text" value="https://www.metmuseum.org/art/collection/search/1">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="tags" class="col-md-2 control-label">Tags
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <textarea class="form-control" id="tags" name="tags"></textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="objectDataWikiURL" class="col-md-2 control-label">Objectdatawikiurl
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="objectDataWikiURL" maxlength="200" name="objectDataWikiURL" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="isTimeLineWork" class="col-md-2 control-label">Istimelinework
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="isTimeLineWork" maxlength="50" name="isTimeLineWork" type="text" value="FALSE">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="galleryNumber" class="col-md-2 control-label">Gallerynumber
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="galleryNumber" maxlength="50" name="galleryNumber" type="text" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="constituentID" class="col-md-2 control-label">Constituentid
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="constituentID" maxlength="50" name="constituentID" type="text" value="164292">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="role" class="col-md-2 control-label">Role
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="role" maxlength="50" name="role" type="text" value="Maker">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="name" class="col-md-2 control-label">Name
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="name" maxlength="100" name="name" type="text" value="James Barton Longacre">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="constituentULANURL" class="col-md-2 control-label">Constituentulanurl
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="constituentULANURL" maxlength="200" name="constituentULANURL" type="text" value="http://vocab.getty.edu/page/ulan/500011409">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="constituentWikiDataURL" class="col-md-2 control-label">Constituentwikidataurl
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="constituentWikiDataURL" maxlength="200" name="constituentWikiDataURL" type="text" value="https://www.wikidata.org/wiki/Q3806459">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="gender" class="col-md-2 control-label">Gender
+        &nbsp;
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="gender" maxlength="50" name="gender" type="text" value="">
+    </div>
+  </div>
+    <hr>
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10">
+        <input type="submit" class="btn btn-primary" value="Submit">
+        <a href="{{ url_for('show') }}" class="btn btn-danger" role="button">Cancel</a>
+      </div>
+    </div>
+    </form>
