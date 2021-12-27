@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='csvviewer',
-    version='1.0.0',
+    version='1.0.1',
     author="Mayank Sharma",
     author_email="me.mayank.0602@gmail.com",
     description="A package for viewing uploaded CSV file",
