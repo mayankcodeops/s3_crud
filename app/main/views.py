@@ -36,7 +36,6 @@ def new():
         for key in keys:
             row.append(request.form[key])
         row = tuple(row)
-        print(row)
         artifact = Artifact(row)
         db.session.add(artifact)
         db.session.commit()
@@ -48,7 +47,6 @@ def new():
 def update(object_id):
     artifact = Artifact.query.filter_by(objectID=object_id).first_or_404()
     form = EditArtifactForm(request.form, obj=artifact)
-    print(request.form.to_dict())
     if form.validate_on_submit():
         form.populate_obj(artifact)
         db.session.add(artifact)
