@@ -1,6 +1,6 @@
 import unittest
-from run import create_app, db
-from run import User, Artifact
+from app import create_app, db
+from app.models import Artifact
 
 
 class FlaskClientTestCase(unittest.TestCase):
@@ -8,6 +8,7 @@ class FlaskClientTestCase(unittest.TestCase):
         self.app = create_app('testing')
         self.app_context = self.app.app_context()
         self.app_context.push()
+        self.client = self.app.test_client()
         db.create_all()
 
     def tearDown(self):
