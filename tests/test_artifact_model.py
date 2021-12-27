@@ -10,7 +10,6 @@ class FlaskClientTestCase(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
-        # TODO insert data from Artifact
         self.artifact_fixture = artifact_fixture
 
     def tearDown(self):
