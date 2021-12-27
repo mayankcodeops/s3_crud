@@ -1,33 +1,4 @@
-from io import TextIOWrapper
-import csv
-
-from flask import Flask, request, redirect, url_for, flash
-from flask.templating import render_template
-from flask_sqlalchemy import SQLAlchemy
-from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
-from forms import EditArtifactForm
-from flask_bootstrap import Bootstrap
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
-app.config['SECRET_KEY'] = 'hard-to-guess'
-db = SQLAlchemy(app)
-Bootstrap(app)
-admin = Admin(app, name='users', template_mode='bootstrap3')
-
-
-class User(db.Model):
-    username = db.Column(db.String(80), unique=True)
-    identifier = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(100))
-    lastname = db.Column(db.String(100))
-
-    def __repr__(self):
-        return "<User: {}>".format(self.username)
-
-
-admin.add_view(ModelView(User, db.session))
+from . import db
 
 keys = [
     "objectID",
@@ -97,7 +68,7 @@ keys = [
 class Artifact(db.Model):
     objectID = db.Column(db.String(10), primary_key=True)
     isHighlight = db.Column(db.String(50))
-    accessionNumber = db.Column(db.String(50), unique=True)
+    accessionNumber = db.Column(db.String(50))
     accessionYear = db.Column(db.String(50))
     isPublicDomain = db.Column(db.String(50))
     primaryImage = db.Column(db.Text)
@@ -160,71 +131,3 @@ class Artifact(db.Model):
     def __init__(self, row):
         for key, item in zip(keys, row):
             self.__dict__[key] = item
-
-
-admin.add_view(ModelView(Artifact, db.session))
-
-
-@app.route('/', methods=['GET', 'POST'])
-def upload_csv():
-    if request.method == 'POST':
-        csv_file = request.files['file']
-        csv_file = TextIOWrapper(csv_file, encoding='utf-8')
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        for row in csv_reader:
-            artifact = Artifact(row)
-            db.session.add(artifact)
-            db.session.commit()
-        return redirect(url_for('upload_csv'))
-    return render_template('upload.html', title='CSV Viewer')
-
-
-@app.route('/show')
-def show():
-    artifacts = Artifact.query
-    return render_template('table.html', title='Artifacts Table', artifacts=artifacts)
-
-
-@app.route('/new', methods=['GET', 'POST'])
-def new():
-    form = EditArtifactForm(request.form)
-    if form.validate_on_submit():
-        row = []
-        for key in keys:
-            row.append(request.form[key])
-        row = tuple(row)
-        artifact = Artifact(row)
-        db.session.add(artifact)
-        db.session.commit()
-        return redirect('/show')
-    return render_template('update_artifact.html', title='Add Artifact', form=form)
-
-
-@app.route('/update/<object_id>', methods=['GET', 'POST'])
-def update(object_id):
-    artifact = Artifact.query.filter_by(objectID=object_id).first_or_404()
-    form = EditArtifactForm(request.form, obj=artifact)
-    print(request.form.to_dict())
-    if form.validate_on_submit():
-        form.populate_obj(artifact)
-        db.session.add(artifact)
-        db.session.commit()
-        flash('Artifact Updated')
-        return redirect('/show')
-    for key in keys:
-        setattr(form, key, artifact.__dict__[key])
-    return render_template('update_artifact.html', title='Edit Artifact', form=form)
-
-
-@app.route('/delete/<object_id>', methods=['GET', 'POST'])
-def delete(object_id):
-    Artifact.query.filter_by(objectID=object_id).delete()
-    db.session.commit()
-    artifacts = Artifact.query
-    return render_template('table.html', title='Artifacts Table', artifacts=artifacts)
-
-
-if __name__ == '__main__':
-    db.create_all()
-    app.run()
-

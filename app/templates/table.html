@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <button type="button" class="btn btn-success btn-sm"
-                onclick="window.location.href='{{ url_for('new') }}';">Create Artifact</button>
+                onclick="window.location.href='{{ url_for('main.new') }}';">Create Artifact</button>
 <table id="data" class="table table-striped">
   <thead>
     <tr>
@@ -135,9 +135,9 @@
 <!--      <td>{{ artifact.gender }}</td>-->
       <td>
         <button type="button" class="btn btn-success btn-sm"
-                onclick="window.location.href='{{ url_for('update', object_id=artifact.objectID ) }}';">Edit</button>
+                onclick="window.location.href='{{ url_for('main.update', object_id=artifact.objectID ) }}';">Edit</button>
         <button type="button" class="btn btn-danger btn-sm"
-                onclick="window.location.href='{{ url_for('delete', object_id=artifact.objectID ) }}';">Delete</button>
+                onclick="window.location.href='{{ url_for('main.delete', object_id=artifact.objectID ) }}';">Delete</button>
       </td>
     </tr>
     {% endfor %}
