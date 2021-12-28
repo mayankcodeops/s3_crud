@@ -13,7 +13,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/mayankcodeops/csv_viewer",
     project_urls={
-        "Bug Tracker" : "https://github.com/mayankcodeops/csv_viewer/issues"
+        "Bug Tracker": "https://github.com/mayankcodeops/csv_viewer/issues"
     },
     classifiers=[
             "Programming Language :: Python :: 3",
