@@ -60,7 +60,7 @@ def update(object_id):
 
 @main.route('/delete/<object_id>', methods=['GET', 'POST'])
 def delete(object_id):
-    Artifact.query.filter_by(objectID=object_id).delete()
+    db.session.delete(Artifact.query.filter_by(objectID=object_id).first())
     db.session.commit()
     artifacts = Artifact.query
     return render_template('table.html', title='Artifacts Table', artifacts=artifacts)
