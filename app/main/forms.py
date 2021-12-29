@@ -4,6 +4,7 @@ from wtforms.validators import DataRequired, Length
 
 
 class EditArtifactForm(FlaskForm):
+    """Artifact form to create form objects to render"""
     objectID = StringField('Object ID', validators=[Length(0, 10), DataRequired()])
     isHighlight = StringField('Highlighted', validators=[Length(0, 50)])
     accessionNumber = StringField('Accession Number', validators=[Length(0, 50)])
@@ -68,6 +69,7 @@ class EditArtifactForm(FlaskForm):
     submit = SubmitField('Submit')
 
     def __init__(self, artifact, *args, **kwargs):
+        """Initialize form object from artifact model object"""
         super(EditArtifactForm, self).__init__(*args, **kwargs)
         self.artifact = artifact
 

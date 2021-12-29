@@ -8,6 +8,11 @@ db = SQLAlchemy()
 
 
 def create_app(config_name):
+    """
+    Factory method to create a flask app instance
+    :param config_name: application configuration environment
+    :return: Flask app instance
+    """
     app = Flask(__name__)
     app.config.from_object(config[config_name])
 

@@ -66,6 +66,9 @@ keys = [
 
 
 class Artifact(db.Model):
+    """
+    Database Model for the Museum Artifact
+    """
     objectID = db.Column(db.String(10), primary_key=True)
     isHighlight = db.Column(db.String(50))
     accessionNumber = db.Column(db.String(50))
@@ -129,5 +132,6 @@ class Artifact(db.Model):
     gender = db.Column(db.String(50))
 
     def __init__(self, row):
+        """Initialize artifact object from a CSV record tuple"""
         for key, item in zip(keys, row):
             self.__dict__[key] = item
