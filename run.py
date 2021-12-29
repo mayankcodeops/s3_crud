@@ -9,13 +9,19 @@ app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
 @app.shell_context_processor
 def make_shell_context():
+    """Returns a dict context to load on Flask shell"""
     return dict(db=db, Artifact=Artifact)
 
 
 @app.cli.command()
 @click.argument('test_names', nargs=-1)
 def test(test_names):
-    """Run the unit tests"""
+    """
+    Command to Run the unit tests
+    Usage
+        $ flask test # to run all the unit tests in the tests/folder
+        $ flask test <test_name> to run a specific test
+    """
     import unittest
     if test_names:
         tests = unittest.TestLoader().loadTestsFromNames(test_names)

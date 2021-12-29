@@ -10,6 +10,7 @@ from .. import db
 
 @main.route('/', methods=['GET', 'POST'])
 def upload_csv():
+    """Route for Uploading CSV file"""
     if request.method == 'POST':
         csv_file = request.files['file']
         csv_file = TextIOWrapper(csv_file, encoding='utf-8')
@@ -24,12 +25,14 @@ def upload_csv():
 
 @main.route('/show')
 def show():
+    """Route to display datatable from database records"""
     artifacts = Artifact.query
     return render_template('table.html', title='Artifacts Table', artifacts=artifacts)
 
 
 @main.route('/new', methods=['GET', 'POST'])
 def new():
+    """Route for creating New Artifact object"""
     form = EditArtifactForm(request.form)
     if form.validate_on_submit():
         row = []
@@ -45,6 +48,7 @@ def new():
 
 @main.route('/update/<object_id>', methods=['GET', 'POST'])
 def update(object_id):
+    """Route for updating any artifact object"""
     artifact = Artifact.query.filter_by(objectID=object_id).first_or_404()
     form = EditArtifactForm(request.form, obj=artifact)
     if form.validate_on_submit():
@@ -60,6 +64,7 @@ def update(object_id):
 
 @main.route('/delete/<object_id>', methods=['GET', 'POST'])
 def delete(object_id):
+    """Route for deleting any existing artifact object"""
     db.session.delete(Artifact.query.filter_by(objectID=object_id).first())
     db.session.commit()
     artifacts = Artifact.query
