@@ -77,6 +77,8 @@ def update(object_id):
 def delete(object_id):
     """Route for deleting any existing artifact object"""
     # TODO delete the particular S3 object
+    response = s3.delete_object(Bucket='s3-task-cli', Key=str(object_id))
+    print(response)
     db.session.delete(Artifact.query.filter_by(objectID=object_id).first())
     db.session.commit()
     artifacts = Artifact.query
