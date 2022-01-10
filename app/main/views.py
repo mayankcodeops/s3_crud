@@ -13,6 +13,7 @@ def upload_csv():
     """Route for Uploading CSV file"""
     if request.method == 'POST':
         csv_file = request.files['file']
+        # TODO Save it to AWS EBS/EFS
         csv_file = TextIOWrapper(csv_file, encoding='utf-8')
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
@@ -35,6 +36,7 @@ def new():
     """Route for creating New Artifact object"""
     form = EditArtifactForm(request.form)
     if form.validate_on_submit():
+        # TODO store the row as a S3 bucket object
         row = []
         for key in keys:
             row.append(request.form[key])
@@ -49,6 +51,7 @@ def new():
 @main.route('/update/<object_id>', methods=['GET', 'POST'])
 def update(object_id):
     """Route for updating any artifact object"""
+    # TODO fetch the s3 object from the bucket to update it
     artifact = Artifact.query.filter_by(objectID=object_id).first_or_404()
     form = EditArtifactForm(request.form, obj=artifact)
     if form.validate_on_submit():
@@ -65,6 +68,7 @@ def update(object_id):
 @main.route('/delete/<object_id>', methods=['GET', 'POST'])
 def delete(object_id):
     """Route for deleting any existing artifact object"""
+    # TODO delete the particular S3 object
     db.session.delete(Artifact.query.filter_by(objectID=object_id).first())
     db.session.commit()
     artifacts = Artifact.query

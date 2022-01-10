@@ -25,10 +25,14 @@ class ProductionConfig(Config):
         'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 
 
+class AWSConfig(Config):
+    pass
+
+
 config = {
     'development': DevelopmentConfig,
     'testing': TestingConfig,
     'production': ProductionConfig,
-
-    'default': DevelopmentConfig
+    'aws': AWSConfig,
+    'default': DevelopmentConfig,
 }
