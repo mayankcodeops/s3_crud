@@ -3,9 +3,13 @@ from ..models import Artifact, keys
 from .forms import EditArtifactForm
 from io import TextIOWrapper
 import csv
+import boto3
+import json
 
 from . import main
 from .. import db
+
+s3 = boto3.client('s3')
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -36,11 +40,13 @@ def new():
     """Route for creating New Artifact object"""
     form = EditArtifactForm(request.form)
     if form.validate_on_submit():
-        # TODO store the row as a S3 bucket object
         row = []
         for key in keys:
             row.append(request.form[key])
         row = tuple(row)
+        # TODO store the row as a S3 bucket object
+        artifact_json = Artifact.export_json(row)
+        response = s3.put_object(Body=artifact_json, Bucket='s3-task-cli', Key=row[0])
         artifact = Artifact(row)
         db.session.add(artifact)
         db.session.commit()
@@ -52,10 +58,17 @@ def new():
 def update(object_id):
     """Route for updating any artifact object"""
     # TODO fetch the s3 object from the bucket to update it
+    response = s3.get_object(Bucket='s3-task-cli', Key=str(object_id))
+    art = Artifact.import_json(response['Body'].read())
+    print(art)
     artifact = Artifact.query.filter_by(objectID=object_id).first_or_404()
     form = EditArtifactForm(request.form, obj=artifact)
     if form.validate_on_submit():
         form.populate_obj(artifact)
+        artifact_obj = artifact.export_artifact()
+        artifact_obj = json.dumps(artifact_obj)
+        response = s3.put_object(Body=artifact_obj, Bucket='s3-task-cli', Key=str(object_id))
+        print(response)
         db.session.add(artifact)
         db.session.commit()
         flash('Artifact Updated')
@@ -69,6 +82,8 @@ def update(object_id):
 def delete(object_id):
     """Route for deleting any existing artifact object"""
     # TODO delete the particular S3 object
+    response = s3.delete_object(Bucket='s3-task-cli', Key=str(object_id))
+    print(response)
     db.session.delete(Artifact.query.filter_by(objectID=object_id).first())
     db.session.commit()
     artifacts = Artifact.query

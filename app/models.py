@@ -1,4 +1,5 @@
 from . import db
+import json
 
 keys = [
     "objectID",
@@ -135,3 +136,25 @@ class Artifact(db.Model):
         """Initialize artifact object from a CSV record tuple"""
         for key, item in zip(keys, row):
             self.__dict__[key] = item
+
+    def export_artifact(self):
+        """Export a JSON format of the current object"""
+        obj = {}
+        for key in keys:
+            obj[key] = self.__dict__[key]
+        return obj
+
+    @staticmethod
+    def export_json(row):
+        """Return a JSON serializable for an artifact object"""
+        obj = {}
+        for key, item in zip(keys, row):
+            obj[key] = item
+
+        return json.dumps(obj)
+
+    @staticmethod
+    def import_json(obj):
+        """Creates an artifact object from a JSON"""
+        obj = json.loads(obj)
+        return tuple(obj.values())
