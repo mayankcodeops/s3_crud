@@ -57,6 +57,9 @@ def new():
 def update(object_id):
     """Route for updating any artifact object"""
     # TODO fetch the s3 object from the bucket to update it
+    response = s3.get_object(Bucket='s3-task-cli', Key=str(object_id))
+    with open('resp.json', 'wb') as file:
+        file.write(response['Body'].read())
     artifact = Artifact.query.filter_by(objectID=object_id).first_or_404()
     form = EditArtifactForm(request.form, obj=artifact)
     if form.validate_on_submit():
