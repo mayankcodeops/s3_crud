@@ -146,3 +146,8 @@ class Artifact(db.Model):
 
         return json.dumps(obj)
 
+    @staticmethod
+    def import_json(obj):
+        """Creates an artifact object from a JSON"""
+        obj = json.loads(obj)
+        return tuple(obj.values())
