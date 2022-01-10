@@ -3,9 +3,12 @@ from ..models import Artifact, keys
 from .forms import EditArtifactForm
 from io import TextIOWrapper
 import csv
+import boto3
 
 from . import main
 from .. import db
+
+s3 = boto3.client('s3')
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -36,11 +39,13 @@ def new():
     """Route for creating New Artifact object"""
     form = EditArtifactForm(request.form)
     if form.validate_on_submit():
-        # TODO store the row as a S3 bucket object
         row = []
         for key in keys:
             row.append(request.form[key])
         row = tuple(row)
+        # TODO store the row as a S3 bucket object
+        artifact_json = Artifact.export_json(row)
+        response = s3.put_object(Body=artifact_json, Bucket='s3-task-cli', Key=row[0])
         artifact = Artifact(row)
         db.session.add(artifact)
         db.session.commit()
