@@ -137,6 +137,13 @@ class Artifact(db.Model):
         for key, item in zip(keys, row):
             self.__dict__[key] = item
 
+    def export_artifact(self):
+        """Export a JSON format of the current object"""
+        obj = {}
+        for key in keys:
+            obj[key] = self.__dict__[key]
+        return obj
+
     @staticmethod
     def export_json(row):
         """Return a JSON serializable for an artifact object"""

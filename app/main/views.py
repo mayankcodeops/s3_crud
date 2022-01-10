@@ -4,6 +4,7 @@ from .forms import EditArtifactForm
 from io import TextIOWrapper
 import csv
 import boto3
+import json
 
 from . import main
 from .. import db
@@ -58,12 +59,16 @@ def update(object_id):
     """Route for updating any artifact object"""
     # TODO fetch the s3 object from the bucket to update it
     response = s3.get_object(Bucket='s3-task-cli', Key=str(object_id))
-    artifact = Artifact.import_json(response['Body'].read())
-    print(artifact)
+    art = Artifact.import_json(response['Body'].read())
+    print(art)
     artifact = Artifact.query.filter_by(objectID=object_id).first_or_404()
     form = EditArtifactForm(request.form, obj=artifact)
     if form.validate_on_submit():
         form.populate_obj(artifact)
+        artifact_obj = artifact.export_artifact()
+        artifact_obj = json.dumps(artifact_obj)
+        response = s3.put_object(Body=artifact_obj, Bucket='s3-task-cli', Key=str(object_id))
+        print(response)
         db.session.add(artifact)
         db.session.commit()
         flash('Artifact Updated')
