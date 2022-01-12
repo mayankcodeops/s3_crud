@@ -15,6 +15,6 @@ def get_artifact(object_id):
     except OSError as err:
         return bad_request(f'No artifact found with objectID: {object_id}, {err}')
     else:
-        return artifact
+        return jsonify(artifact)
 
 
