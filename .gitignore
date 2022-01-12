@@ -145,6 +145,3 @@ cython_debug/
 
 # PyCharm
 .idea/
-
-# JSON files
-*.json
