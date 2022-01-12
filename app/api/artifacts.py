@@ -13,8 +13,8 @@ def get_artifact(object_id):
         with open(artifact_dir + object_id + '.json', 'r') as f:
             artifact = f.read()
     except OSError as err:
-        return bad_request(f'No artifact found with objectID: {object_id}, {err}')
+        return bad_request(f'No artifact found with objectID: {object_id}')
     else:
-        return jsonify(artifact)
+        return jsonify({object_id: artifact})
 
 
